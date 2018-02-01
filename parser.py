@@ -11,6 +11,7 @@ def importData(nameFile, hasActivity=True) :
     # Clean up columns
     del df['accuracy']
     del df['altitude']
+    #del df['verticalAccuracy']
 
     if (hasActivity) :
         del df['activity']
@@ -47,8 +48,8 @@ def importData(nameFile, hasActivity=True) :
 def getDate(startDate, endDate, df) :
     a = df[df['date'] == endDate].index.tolist()[0]
     b = df[df['date'] == startDate].index.tolist()[0]
-    return df.loc[a:(b - 1),]
-
+    result = df.loc[a:(b - 1),]
+    return result.reset_index(drop=True)
 
 def getData(nameFile, bComputeDistance, bComputeVelocity):
     dataFrame = importData(nameFile)
