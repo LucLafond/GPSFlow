@@ -3,15 +3,18 @@ import pandas as pd
 import datetime
 import distance
 
-def importData(nameFile) :
+def importData(nameFile, hasActivity=True) :
     # Loading data
     raw = pd.io.json.read_json(nameFile)
     df = raw['locations'].apply(pd.Series)
 
     # Clean up columns
     del df['accuracy']
-    del df['activity']
     del df['altitude']
+
+    if (hasActivity) :
+        del df['activity']
+
     del df['velocity']
     del df['heading']
 
